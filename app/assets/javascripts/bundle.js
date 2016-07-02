@@ -25324,7 +25324,7 @@
 	    var img = new Image();
 
 	    img.crossOrigin = 'Anonymous';
-	    img.src = "http://lorempixel.com/300/300/cats/";
+	    img.src = "https://s3-us-west-1.amazonaws.com/bravaudio/images/profile_pic/user16.jpg";
 	    img.onload = function () {
 	      ctx.drawImage(img, 0, 0);
 	    };
