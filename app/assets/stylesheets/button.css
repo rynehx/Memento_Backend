@@ -1,0 +1,19 @@
+.button{
+  height: 40px;
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.login{
+  margin: 20px;
+  background-color: maroon;
+}
+
+
+.view{
+  margin: 20px;
+  background-color: lightblue;
+}
