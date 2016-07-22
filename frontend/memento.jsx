@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded',function(){
     // Check to make sure that this message came from the correct domain.
     console.log(msg);
   };
-
+    console.log("hi");
 
   window.addEventListener('message', receiveMessage);
 
