@@ -58,10 +58,9 @@
 	  console.log("loaded");
 	});
 
-	console.log("memento.jsx");
-
 	//DOM listener
 	document.addEventListener('DOMContentLoaded', function () {
+	  console.log("memento.jsx");
 	  window.addEventListener('message', function (msg) {
 	    console.log("hi");
 	    console.log(msg);
