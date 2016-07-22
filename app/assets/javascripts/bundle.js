@@ -54,15 +54,6 @@
 	//component
 	var Index = __webpack_require__(221);
 
-	window.addEventListener('message', function (msg) {
-	  console.log("hi");
-	  console.log(msg);
-	});
-
-	document.addEventListener("load", function () {
-	  console.log("loaded");
-	});
-
 	//DOM listener
 	document.addEventListener('DOMContentLoaded', function () {
 
