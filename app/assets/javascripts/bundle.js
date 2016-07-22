@@ -54,10 +54,6 @@
 	//component
 	var Index = __webpack_require__(221);
 
-	window.addEventListener("load", function () {
-	  console.log("loaded");
-	});
-
 	//DOM listener
 	document.addEventListener('DOMContentLoaded', function () {
 	  console.log("memento.jsx");
@@ -65,6 +61,7 @@
 	    console.log("hi");
 	    console.log(msg);
 	  }, false);
+
 	  var root = document.getElementById('content');
 
 	  ReactDOM.render(React.createElement(Index, null), root);

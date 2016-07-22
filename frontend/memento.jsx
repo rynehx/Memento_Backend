@@ -9,21 +9,15 @@ var Index = require('./index.jsx');
 
 
 
-window.addEventListener("load", function() {
-    console.log("loaded");
-
-  });
-
-
-
-
 //DOM listener
 document.addEventListener('DOMContentLoaded',function(){
-      console.log("memento.jsx");
+    console.log("memento.jsx");
   window.addEventListener('message', function(msg) {
     console.log("hi");
     console.log(msg);
   },false);
+
+
   var root = document.getElementById('content');
 
   ReactDOM.render(
