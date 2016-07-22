@@ -7,6 +7,10 @@ var React = require('react'),
 //component
 var Index = require('./index.jsx');
 
+window.addEventListener('message', function(msg) {
+  console.log("hi");
+  console.log(msg);
+});
 
 
 

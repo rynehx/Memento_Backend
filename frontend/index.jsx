@@ -10,10 +10,6 @@ PDK.init({ appId: Const.AppId, cookie: true });
 
 
 
-window.addEventListener('message', function(msg) {
-  // Check to make sure that this message came from the correct domain.
-  console.log(msg);
-});
 
 
 

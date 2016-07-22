@@ -54,6 +54,11 @@
 	//component
 	var Index = __webpack_require__(221);
 
+	window.addEventListener('message', function (msg) {
+	  console.log("hi");
+	  console.log(msg);
+	});
+
 	//DOM listener
 	document.addEventListener('DOMContentLoaded', function () {
 
@@ -25262,11 +25267,6 @@
 	var Const = __webpack_require__(222);
 
 	PDK.init({ appId: Const.AppId, cookie: true });
-
-	window.addEventListener('message', function (msg) {
-	  // Check to make sure that this message came from the correct domain.
-	  console.log(msg);
-	});
 
 	var App = React.createClass({
 	  displayName: 'App',
