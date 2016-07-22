@@ -56,11 +56,13 @@
 
 	//DOM listener
 	document.addEventListener('DOMContentLoaded', function () {
-	  console.log("memento.jsx");
-	  window.addEventListener('message', function (msg) {
-	    console.log("hi");
+
+	  var receiveMessage = function receiveMessage(msg) {
+	    // Check to make sure that this message came from the correct domain.
 	    console.log(msg);
-	  }, false);
+	  };
+
+	  window.addEventListener('message', receiveMessage);
 
 	  var root = document.getElementById('content');
 
@@ -25267,6 +25269,8 @@
 	var Const = __webpack_require__(222);
 
 	PDK.init({ appId: Const.AppId, cookie: true });
+
+	//
 
 	var App = React.createClass({
 	  displayName: 'App',

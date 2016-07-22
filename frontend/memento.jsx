@@ -9,13 +9,19 @@ var Index = require('./index.jsx');
 
 
 
+
+
 //DOM listener
 document.addEventListener('DOMContentLoaded',function(){
-    console.log("memento.jsx");
-  window.addEventListener('message', function(msg) {
-    console.log("hi");
+
+
+  var  receiveMessage = function(msg) {
+    // Check to make sure that this message came from the correct domain.
     console.log(msg);
-  },false);
+  };
+
+
+  window.addEventListener('message', receiveMessage);
 
 
   var root = document.getElementById('content');
