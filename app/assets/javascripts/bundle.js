@@ -25293,9 +25293,7 @@
 	  },
 
 	  _login: function _login() {
-	    PDK.login({ scope: Const.PIN_SCOPE }, function (s) {
-	      console.log(s);
-	    });
+	    PDK.login({ scope: Const.PIN_SCOPE }, function (s) {});
 	  },
 
 	  _getSession: function _getSession(s) {

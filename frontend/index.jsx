@@ -46,7 +46,6 @@ var App = React.createClass({
 
   _login: function(){
     PDK.login({ scope : Const.PIN_SCOPE },  function(s){
-     console.log(s);
    });
   },
 
