@@ -60,8 +60,10 @@
 	  var receiveMessage = function receiveMessage(msg) {
 	    // Check to make sure that this message came from the correct domain.
 	    console.log(msg);
+
+	    var img = document.getElementById('image');
+	    img.src = msg.data.data;
 	  };
-	  console.log("hi");
 
 	  window.addEventListener('message', receiveMessage);
 
@@ -25366,7 +25368,7 @@
 	        React.createElement(
 	          'div',
 	          { className: 'content-left' },
-	          React.createElement('canvas', { id: 'canvas' })
+	          React.createElement('img', { id: 'image' })
 	        ),
 	        React.createElement(
 	          'div',
