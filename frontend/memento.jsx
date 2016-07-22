@@ -12,6 +12,10 @@ window.addEventListener('message', function(msg) {
   console.log(msg);
 });
 
+document.addEventListener("load", function() {
+    console.log("loaded");
+
+  });
 
 
 

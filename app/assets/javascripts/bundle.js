@@ -59,6 +59,10 @@
 	  console.log(msg);
 	});
 
+	document.addEventListener("load", function () {
+	  console.log("loaded");
+	});
+
 	//DOM listener
 	document.addEventListener('DOMContentLoaded', function () {
 
