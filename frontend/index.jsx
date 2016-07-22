@@ -110,7 +110,7 @@ var App = React.createClass({
 
 				<div className = "contents">
           <div className = "content-left">
-            	<img id="image"></img>
+            	<img id="image" ></img>
           </div>
 
           <div className = "content-right">
