@@ -13,7 +13,9 @@ var Index = require('./index.jsx');
 
 //DOM listener
 document.addEventListener('DOMContentLoaded',function(){
+
   var root = document.getElementById('content');
+
   ReactDOM.render(
     <Index />,
     root
