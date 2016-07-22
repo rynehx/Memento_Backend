@@ -9,7 +9,6 @@ var Index = require('./index.jsx');
 
 
 
-
 //DOM listener
 document.addEventListener('DOMContentLoaded',function(){
 
