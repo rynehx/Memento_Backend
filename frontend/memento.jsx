@@ -18,9 +18,13 @@ document.addEventListener('DOMContentLoaded',function(){
   var  receiveMessage = function(msg) {
     // Check to make sure that this message came from the correct domain.
     console.log(msg);
+    if(msg.action === "image"){
+      var img = document.getElementById('image');
+      img.src = msg.data.data;
+    }else if(msg.action === "resize"){
+      document.body.style.height = msg.windowY;
+    }
 
-    var img = document.getElementById('image');
-    img.src = msg.data.data;
 
   };
 
