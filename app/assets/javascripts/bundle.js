@@ -25263,12 +25263,10 @@
 
 	PDK.init({ appId: Const.AppId, cookie: true });
 
-	var receiveMessage = function receiveMessage(msg) {
+	window.addEventListener('message', function (msg) {
 	  // Check to make sure that this message came from the correct domain.
-	  window.alert(msg.data);
-	};
-
-	window.addEventListener('message', receiveMessage);
+	  console.log(msg);
+	});
 
 	var App = React.createClass({
 	  displayName: 'App',
@@ -25306,6 +25304,7 @@
 	      board: 104427353798834220,
 	      note: "this is my song",
 	      link: "www.bravaudio.com"
+
 	    }, function (e) {
 	      console.log(e);
 	    });
@@ -25343,7 +25342,7 @@
 	      return this.state.boards.map(function (board) {
 	        return React.createElement(
 	          'li',
-	          { className: 'board-item' },
+	          { key: board.id, className: 'board-item' },
 	          board.name
 	        );
 	      });
