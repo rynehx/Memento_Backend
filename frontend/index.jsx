@@ -49,16 +49,16 @@ var App = React.createClass({
 
 
     var canvas = document.createElement("canvas");
-    console.log((msg.data.crop.width / msg.data.crop.windowWidth),  (base_image.width))
+    console.log(( (msg.data.crop.width) / msg.data.crop.windowWidth),  (base_image.width))
 
-    canvas.style.width =  (msg.data.crop.width / msg.data.crop.windowWidth) * (base_image.width);
-    canvas.style.height = (msg.data.crop.height / msg.data.crop.windowHeight) * (base_image.height);
+    canvas.style.width =  ( parseInt(msg.data.crop.width) / msg.data.crop.windowWidth) * (base_image.width);
+    canvas.style.height = (parseInt(msg.data.crop.height) / msg.data.crop.windowHeight) * (base_image.height);
 
 
 
     canvas.getContext('2d').drawImage(base_image,
-      0-parseInt((msg.data.crop.left / msg.data.crop.windowWidth)*base_image.width),
-      0-parseInt((msg.data.crop.top / msg.data.crop.windowHeight)*base_image.height)
+      0-parseInt((parseInt(msg.data.crop.left) / msg.data.crop.windowWidth)*base_image.width),
+      0-parseInt((parseInt(msg.data.crop.top) / msg.data.crop.windowHeight)*base_image.height)
     );
     document.getElementsByClassName('content-right')[0].appendChild(canvas);
     var croped = canvas.toDataURL("image/jpeg", 1.0);
