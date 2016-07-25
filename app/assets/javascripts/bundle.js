@@ -25299,8 +25299,10 @@
 	    base_image.src = msg.data.data;
 
 	    var canvas = document.createElement("canvas");
-	    canvas.width = msg.data.crop.width / msg.data.crop.windowWidth * base_image.width;
-	    canvas.height = msg.data.crop.height / msg.data.crop.windowHeight * base_image.height;
+	    console.log(msg.data.crop.width / msg.data.crop.windowWidth * base_image.width);
+
+	    canvas.style.width = msg.data.crop.width / msg.data.crop.windowWidth * base_image.width;
+	    canvas.style.height = msg.data.crop.height / msg.data.crop.windowHeight * base_image.height;
 
 	    canvas.getContext('2d').drawImage(base_image, 0 - parseInt(msg.data.crop.left / msg.data.crop.windowWidth * base_image.width), 0 - parseInt(msg.data.crop.top / msg.data.crop.windowHeight * base_image.height));
 	    document.getElementsByClassName('content-right')[0].appendChild(canvas);

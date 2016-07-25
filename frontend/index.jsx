@@ -49,8 +49,10 @@ var App = React.createClass({
 
 
     var canvas = document.createElement("canvas");
-    canvas.width =  (msg.data.crop.width / msg.data.crop.windowWidth) * (base_image.width);
-    canvas.height = (msg.data.crop.height /msg.data.crop.windowHeight) * (base_image.height);
+    console.log((msg.data.crop.width / msg.data.crop.windowWidth) * (base_image.width))
+
+    canvas.style.width =  (msg.data.crop.width / msg.data.crop.windowWidth) * (base_image.width);
+    canvas.style.height = (msg.data.crop.height / msg.data.crop.windowHeight) * (base_image.height);
 
 
 
