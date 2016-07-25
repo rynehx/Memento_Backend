@@ -41,6 +41,7 @@ var App = React.createClass({
   },
 
   _recieveMessage: function(msg){
+    console.log(msg)
     var base_image = new Image();
     base_image.src = msg.data;
     this.setState({image: msg.data, crop: msg.crop});
