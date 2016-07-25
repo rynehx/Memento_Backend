@@ -49,7 +49,6 @@ var App = React.createClass({
 
 
     var canvas = document.createElement("canvas");
-    console.log(( (msg.data.crop.width) / msg.data.crop.windowWidth),  (base_image.width))
     console.log(( parseInt(msg.data.crop.width) / msg.data.crop.windowWidth) * (base_image.width))
     canvas.width =  ( parseInt(msg.data.crop.width) / msg.data.crop.windowWidth) * (base_image.width);
     canvas.height = (parseInt(msg.data.crop.height) / msg.data.crop.windowHeight) * (base_image.height);
@@ -63,7 +62,7 @@ var App = React.createClass({
     document.getElementsByClassName('content-right')[0].appendChild(canvas);
     var croped = canvas.toDataURL("image/jpeg", 1.0);
     document.getElementById('image').src = msg.data.data;
-    console.log(croped);
+
   },
 
   _login: function(){

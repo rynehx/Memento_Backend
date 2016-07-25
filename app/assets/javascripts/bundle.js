@@ -25299,7 +25299,6 @@
 	    base_image.src = msg.data.data;
 
 	    var canvas = document.createElement("canvas");
-	    console.log(msg.data.crop.width / msg.data.crop.windowWidth, base_image.width);
 	    console.log(parseInt(msg.data.crop.width) / msg.data.crop.windowWidth * base_image.width);
 	    canvas.width = parseInt(msg.data.crop.width) / msg.data.crop.windowWidth * base_image.width;
 	    canvas.height = parseInt(msg.data.crop.height) / msg.data.crop.windowHeight * base_image.height;
