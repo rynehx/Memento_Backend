@@ -46,7 +46,9 @@ var App = React.createClass({
     base_image.src = msg.data.data;
     this.setState({image: msg.data.data, crop: msg.data.crop});
     var canvas = document.createElement("canvas");
-    canvas.getContext('2d').drawImage(base_image, -1*parseInt(msg.data.crop.left), -1*parseInt(msg.data.crop.top));
+    canvas.width = msg.data.crop.width;
+    canvas.height = msg.data.crop.height;
+    canvas.getContext('2d').drawImage(base_image, -1*parseInt(msg.data.crop.left), -1*parseInt(msg.data.crop.top), msg.data.crop.width, msg.data.crop.height);
     var croped = canvas.toDataURL("image/jpeg", 1.0);
     document.getElementById('image').src = croped;
     console.log(croped);
