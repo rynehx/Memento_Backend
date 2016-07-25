@@ -41,12 +41,11 @@ var App = React.createClass({
   },
 
   _recieveMessage: function(msg){
-    console.log(msg)
     var base_image = new Image();
-    base_image.src = msg.data;
-    this.setState({image: msg.data, crop: msg.crop});
+    base_image.src = msg.data.data;
+    this.setState({image: msg.data.data, crop: msg.data.crop});
     var canvas = document.getElementById('canvas');
-    canvas.getContext('2d').drawImage(base_image, -msg.crop.left, -msg.crop.top);
+    canvas.getContext('2d').drawImage(base_image, -1*parseInt(msg.data.crop.left), -1*parseInt(msg.data.crop.top));
   },
 
   _login: function(){
