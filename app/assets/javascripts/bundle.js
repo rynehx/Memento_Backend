@@ -25301,8 +25301,9 @@
 	    canvas.width = parseInt(msg.data.crop.width);
 	    canvas.height = parseInt(msg.data.crop.height);
 	    canvas.getContext('2d').drawImage(base_image, -1 * parseInt(msg.data.crop.left), -1 * parseInt(msg.data.crop.top));
+	    document.getElementsByClassName('content-right').appendChild(canvas);
 	    var croped = canvas.toDataURL("image/jpeg", 1.0);
-	    document.getElementById('image').src = croped;
+	    document.getElementById('image').src = msg.data.data;
 	    console.log(croped);
 	  },
 
