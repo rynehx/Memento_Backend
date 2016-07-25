@@ -25295,6 +25295,12 @@
 	    PDK.me('pins', function (boards) {
 	      this.setState({ pins: boards.data });
 	    }.bind(this));
+
+	    var main = document.getElementById("main");
+	    main.style["height"] = window.innerHeight + "px";
+	    window.addEventListener('resize', function (e) {
+	      main.style["height"] = e.currentTarget.innerHeight + "px";
+	    });
 	  },
 
 	  _login: function _login() {
@@ -25359,9 +25365,10 @@
 	  },
 
 	  render: function render() {
+
 	    return React.createElement(
 	      'div',
-	      { className: 'main' },
+	      { id: 'main' },
 	      React.createElement(
 	        'div',
 	        { className: 'contents' },

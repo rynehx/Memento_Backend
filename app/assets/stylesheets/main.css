@@ -33,11 +33,12 @@ time, mark, audio, video {
 
 }
 
-.main{
+#main{
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 400px;
 }
 
 .background{
@@ -54,7 +55,7 @@ time, mark, audio, video {
 
 .contents{
   width: 80%;
-  height: 50%;
+  height: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -94,7 +95,6 @@ time, mark, audio, video {
 .board-list{
   width: 100%;
   overflow: scroll;
-  height: 500px;
 }
 
 .board-item{

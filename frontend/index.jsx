@@ -5,17 +5,15 @@ var React = require('react');
 var Const = require('./constants.js');
 
 
+
+window.addEventListener('message', App._recieveMessage);
+
+
 PDK.init({ appId: Const.AppId, cookie: true });
-
-
-
-//
-
-
 
 var App = React.createClass({
   getInitialState: function () {
-    return { user: undefined, pins: [], boards: [] };
+    return { user: undefined, pins: [], boards: [], image: null, crop: null };
   },
 
 
@@ -34,6 +32,16 @@ var App = React.createClass({
       this.setState({pins: boards.data});
     }.bind(this));
 
+    var main = document.getElementById("main");
+    main.style["height"] = window.innerHeight + "px";
+    window.addEventListener('resize', function(e){
+      main.style["height"] = e.currentTarget.innerHeight + "px";
+    });
+  },
+
+  _recieveMessage: function(msg){
+
+    this.setState({image: msg.data, crop: msg.crop});
 
   },
 
@@ -44,7 +52,6 @@ var App = React.createClass({
 
   _getSession: function(s){
     console.log(PDK.getSession());
-
   },
 
   _pin: function(){
@@ -103,14 +110,15 @@ var App = React.createClass({
   },
 
   render: function(){
+
     return (
 
-			<div className = "main">
+			<div id="main" >
 
 
 				<div className = "contents">
           <div className = "content-left">
-            	<img id="image" ></img>
+            	<img id="image" src = {this.state.image}></img>
           </div>
 
           <div className = "content-right">
