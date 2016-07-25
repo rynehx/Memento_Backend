@@ -6,7 +6,7 @@ var Const = require('./constants.js');
 
 
 
-window.addEventListener('message', App._recieveMessage);
+
 
 
 PDK.init({ appId: Const.AppId, cookie: true });
@@ -18,6 +18,7 @@ var App = React.createClass({
 
 
   componentDidMount: function(){
+    window.addEventListener('message', this._recieveMessage);
 
     PDK.me( function(me){
       this.setState({user: me.data});
@@ -40,9 +41,11 @@ var App = React.createClass({
   },
 
   _recieveMessage: function(msg){
-
+    var base_image = new Image();
+    base_image.src = msg.data;
     this.setState({image: msg.data, crop: msg.crop});
-
+    var canvas = document.getElementById('canvas');
+    canvas.getContext('2d').drawImage(base_image, -msg.crop.left, -msg.crop.top);
   },
 
   _login: function(){
@@ -118,7 +121,7 @@ var App = React.createClass({
 
 				<div className = "contents">
           <div className = "content-left">
-            	<img id="image" src = {this.state.image}></img>
+              <canvas id = "canvas"></canvas>
           </div>
 
           <div className = "content-right">

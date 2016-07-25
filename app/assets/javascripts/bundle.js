@@ -57,16 +57,6 @@
 	//DOM listener
 	document.addEventListener('DOMContentLoaded', function () {
 
-	  var receiveMessage = function receiveMessage(msg) {
-	    // Check to make sure that this message came from the correct domain.
-	    console.log(msg);
-
-	    var img = document.getElementById('image');
-	    img.src = msg.data.data;
-	  };
-
-	  window.addEventListener('message', receiveMessage);
-
 	  var root = document.getElementById('content');
 
 	  ReactDOM.render(React.createElement(Index, null), root);
@@ -25273,16 +25263,15 @@
 
 	PDK.init({ appId: Const.AppId, cookie: true });
 
-	//
-
 	var App = React.createClass({
 	  displayName: 'App',
 
 	  getInitialState: function getInitialState() {
-	    return { user: undefined, pins: [], boards: [] };
+	    return { user: undefined, pins: [], boards: [], image: null, crop: null };
 	  },
 
 	  componentDidMount: function componentDidMount() {
+	    window.addEventListener('message', this._recieveMessage);
 
 	    PDK.me(function (me) {
 	      this.setState({ user: me.data });
@@ -25301,6 +25290,14 @@
 	    window.addEventListener('resize', function (e) {
 	      main.style["height"] = e.currentTarget.innerHeight + "px";
 	    });
+	  },
+
+	  _recieveMessage: function _recieveMessage(msg) {
+	    var base_image = new Image();
+	    base_image.src = msg.data;
+	    this.setState({ image: msg.data, crop: msg.crop });
+	    var canvas = document.getElementById('canvas');
+	    canvas.getContext('2d').drawImage(base_image, -msg.crop.left, -msg.crop.top);
 	  },
 
 	  _login: function _login() {
@@ -25375,7 +25372,7 @@
 	        React.createElement(
 	          'div',
 	          { className: 'content-left' },
-	          React.createElement('img', { id: 'image' })
+	          React.createElement('canvas', { id: 'canvas' })
 	        ),
 	        React.createElement(
 	          'div',

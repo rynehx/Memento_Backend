@@ -69,7 +69,7 @@ time, mark, audio, video {
 .content-left{
   background-color: darkgrey;
   min-height: 100%;
-
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -90,7 +90,10 @@ time, mark, audio, video {
   flex-direction: column;
 }
 
-
+#canvas{
+  width:100%;
+  height: auto;
+}
 
 .board-list{
   width: 100%;
