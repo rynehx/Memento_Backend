@@ -25293,11 +25293,15 @@
 	  },
 
 	  _recieveMessage: function _recieveMessage(msg) {
+	    console.log(msg);
 	    var base_image = new Image();
 	    base_image.src = msg.data.data;
 	    this.setState({ image: msg.data.data, crop: msg.data.crop });
 	    var canvas = document.getElementById('canvas');
 	    canvas.getContext('2d').drawImage(base_image, -1 * parseInt(msg.data.crop.left), -1 * parseInt(msg.data.crop.top));
+	    var croped = canvas.toDataURL("image/jpeg", 1.0);
+	    document.getElementById('image').src = croped;
+	    console.log(croped);
 	  },
 
 	  _login: function _login() {
@@ -25372,7 +25376,7 @@
 	        React.createElement(
 	          'div',
 	          { className: 'content-left' },
-	          React.createElement('canvas', { id: 'canvas' })
+	          React.createElement('img', { id: 'image' })
 	        ),
 	        React.createElement(
 	          'div',

@@ -41,11 +41,15 @@ var App = React.createClass({
   },
 
   _recieveMessage: function(msg){
+    console.log(msg);
     var base_image = new Image();
     base_image.src = msg.data.data;
     this.setState({image: msg.data.data, crop: msg.data.crop});
     var canvas = document.getElementById('canvas');
     canvas.getContext('2d').drawImage(base_image, -1*parseInt(msg.data.crop.left), -1*parseInt(msg.data.crop.top));
+    var croped = canvas.toDataURL("image/jpeg", 1.0);
+    document.getElementById('image').src = croped;
+    console.log(croped);
   },
 
   _login: function(){
@@ -121,7 +125,7 @@ var App = React.createClass({
 
 				<div className = "contents">
           <div className = "content-left">
-              <canvas id = "canvas"></canvas>
+              <img id = "image"></img>
           </div>
 
           <div className = "content-right">
