@@ -25300,7 +25300,7 @@
 	    var canvas = document.createElement("canvas");
 	    canvas.width = parseInt(msg.data.crop.width);
 	    canvas.height = parseInt(msg.data.crop.height);
-	    console.log(msg.data.crop.left, msg.data.crop.top);
+	    console.log(0 - parseInt(msg.data.crop.left), 0 - parseInt(msg.data.crop.top));
 	    canvas.getContext('2d').drawImage(base_image, 0 - parseInt(msg.data.crop.left), 0 - parseInt(msg.data.crop.top));
 	    document.getElementsByClassName('content-right')[0].appendChild(canvas);
 	    var croped = canvas.toDataURL("image/jpeg", 1.0);
