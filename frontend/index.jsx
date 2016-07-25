@@ -42,14 +42,22 @@ var App = React.createClass({
 
   _recieveMessage: function(msg){
     console.log(msg);
+    this.setState({image: msg.data.data, crop: msg.data.crop});
     var base_image = new Image();
     base_image.src = msg.data.data;
-    this.setState({image: msg.data.data, crop: msg.data.crop});
+
+
+
     var canvas = document.createElement("canvas");
-    canvas.width = parseInt(msg.data.crop.width);
-    canvas.height = parseInt(msg.data.crop.height);
-    console.log(0-parseInt(msg.data.crop.left), 0-parseInt(msg.data.crop.top));
-    canvas.getContext('2d').drawImage(base_image, 0-parseInt(msg.data.crop.left), 0-parseInt(msg.data.crop.top));
+    canvas.width =  (msg.data.crop.width / msg.data.crop.windowWidth) * (base_image.width);
+    canvas.height = (msg.data.crop.height /msg.data.crop.windowHeight) * (base_image.height);
+
+
+
+    canvas.getContext('2d').drawImage(base_image,
+      0-parseInt((msg.data.crop.left / msg.data.crop.windowWidth)*base_image.width),
+      0-parseInt((msg.data.crop.top / msg.data.crop.windowHeight)*base_image.height)
+    );
     document.getElementsByClassName('content-right')[0].appendChild(canvas);
     var croped = canvas.toDataURL("image/jpeg", 1.0);
     document.getElementById('image').src = msg.data.data;
