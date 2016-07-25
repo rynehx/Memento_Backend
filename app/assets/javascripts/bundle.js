@@ -25307,7 +25307,6 @@
 	    document.getElementsByClassName('content-right')[0].appendChild(canvas);
 	    var croped = canvas.toDataURL("image/jpeg", 1.0);
 	    document.getElementById('image').src = msg.data.data;
-	    console.log(croped);
 	  },
 
 	  _login: function _login() {
