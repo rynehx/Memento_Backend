@@ -76,8 +76,8 @@ time, mark, audio, video {
 }
 
 #image{
-  width: 200px;
-  height: 200px;
+  width: 100%;
+  height: auto;
 }
 
 .content-right{
