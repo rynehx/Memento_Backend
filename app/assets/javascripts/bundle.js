@@ -25299,14 +25299,14 @@
 	    base_image.src = msg.data.data;
 
 	    var canvas = document.createElement("canvas");
-	    console.log(parseInt(msg.data.crop.width) / msg.data.crop.windowWidth * base_image.width);
 	    canvas.width = parseInt(msg.data.crop.width) / msg.data.crop.windowWidth * base_image.width;
 	    canvas.height = parseInt(msg.data.crop.height) / msg.data.crop.windowHeight * base_image.height;
 
 	    canvas.getContext('2d').drawImage(base_image, 0 - parseInt(parseInt(msg.data.crop.left) / msg.data.crop.windowWidth * base_image.width), 0 - parseInt(parseInt(msg.data.crop.top) / msg.data.crop.windowHeight * base_image.height));
-	    document.getElementsByClassName('content-right')[0].appendChild(canvas);
+	    //document.getElementsByClassName('content-right')[0].appendChild(canvas);
 	    var croped = canvas.toDataURL("image/jpeg", 1.0);
-	    document.getElementById('image').src = msg.data.data;
+	    this.setState({ image: croped });
+	    document.getElementById('image').src = croped;
 	  },
 
 	  _login: function _login() {
@@ -25318,15 +25318,16 @@
 	  },
 
 	  _pin: function _pin() {
-
-	    PDK.request('/pins/', 'POST', {
-	      board: 104427353798834220,
-	      note: "this is my song",
-	      link: "www.bravaudio.com"
-
-	    }, function (e) {
-	      console.log(e);
-	    });
+	    if (this.state.image) {
+	      PDK.request('/pins/', 'POST', {
+	        board: 104427353798834220,
+	        note: "this is my song",
+	        link: "www.bravaudio.com",
+	        image_base64: this.state.image
+	      }, function (e) {
+	        console.log(e);
+	      });
+	    }
 	  },
 
 	  _boards: function _boards() {
