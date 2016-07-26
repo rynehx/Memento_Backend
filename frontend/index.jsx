@@ -86,7 +86,7 @@ var App = React.createClass({
   _pin: function(board){
 
     if(this.state.image){
-      console.log(baord.id, this.state.description, this.state.link, this.state.image)
+      console.log(board.id, this.state.description, this.state.link, this.state.image)
       PDK.request('/pins/',
        'POST',
        {
