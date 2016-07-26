@@ -84,8 +84,9 @@ var App = React.createClass({
 
 
   _pin: function(board){
-    console.log(board.id)
+
     if(this.state.image){
+      console.log(baord.id, this.state.description, this.state.link, this.state.image)
       PDK.request('/pins/',
        'POST',
        {
@@ -93,7 +94,7 @@ var App = React.createClass({
           note: this.state.description,
           link: this.state.link,
           image_base64: this.state.image
-          },
+              },
         function(e){
           console.log(e);
         });
@@ -156,7 +157,7 @@ var App = React.createClass({
 
 
           <div className = "content-right">
-            
+
             <ul className = "board-list">
               {this.showBoards()}
             </ul>

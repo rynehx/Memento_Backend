@@ -96,7 +96,7 @@ time, mark, audio, video {
 
 #image{
   max-height:80%;
-  width: 80%;
+  max-width: 80%;
   height: auto;
 }
 
