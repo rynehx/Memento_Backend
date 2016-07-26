@@ -25267,7 +25267,7 @@
 	  displayName: 'App',
 
 	  getInitialState: function getInitialState() {
-	    return { user: undefined, pins: [], boards: [], image: null, crop: null };
+	    return { user: undefined, pins: [], boards: [], image: null, crop: null, link: "", description: "" };
 	  },
 
 	  componentDidMount: function componentDidMount() {
@@ -25281,9 +25281,9 @@
 	      this.setState({ boards: boards.data });
 	    }.bind(this));
 
-	    PDK.me('pins', function (boards) {
-	      this.setState({ pins: boards.data });
-	    }.bind(this));
+	    // PDK.me('pins', function(boards){
+	    //   this.setState({pins: boards.data});
+	    // }.bind(this));
 
 	    var main = document.getElementById("main");
 	    main.style["height"] = window.innerHeight + "px";
@@ -25305,24 +25305,33 @@
 	    canvas.getContext('2d').drawImage(base_image, 0 - parseInt(parseInt(msg.data.crop.left) / msg.data.crop.windowWidth * base_image.width), 0 - parseInt(parseInt(msg.data.crop.top) / msg.data.crop.windowHeight * base_image.height));
 	    //document.getElementsByClassName('content-right')[0].appendChild(canvas);
 	    var croped = canvas.toDataURL("image/jpeg", 1.0);
+	    console.log(croped.length);
 	    this.setState({ image: croped });
 	    document.getElementById('image').src = croped;
 	  },
 
 	  _login: function _login() {
-	    PDK.login({ scope: Const.PIN_SCOPE }, function (s) {});
+	    PDK.login({ scope: Const.PIN_SCOPE }, function (res) {
+
+	      if (res.session.accessToken) {
+	        PDK.me(function (me) {
+	          this.setState({ user: me.data });
+	        }.bind(this));
+
+	        PDK.me('boards', function (boards) {
+	          this.setState({ boards: boards.data });
+	        }.bind(this));
+	      }
+	    }.bind(this));
 	  },
 
-	  _getSession: function _getSession(s) {
-	    console.log(PDK.getSession());
-	  },
-
-	  _pin: function _pin() {
+	  _pin: function _pin(board) {
+	    console.log(board.id);
 	    if (this.state.image) {
 	      PDK.request('/pins/', 'POST', {
-	        board: 104427353798834220,
-	        note: "this is my song",
-	        link: "www.bravaudio.com",
+	        board: board.id,
+	        note: this.state.description,
+	        link: this.state.link,
 	        image_base64: this.state.image
 	      }, function (e) {
 	        console.log(e);
@@ -25330,31 +25339,10 @@
 	    }
 	  },
 
-	  _boards: function _boards() {
-	    PDK.me('boards', { fields: Const.BOARD_FIELDS }, function (s) {
-	      console.log(s);
-	    });
-	  },
-
-	  _converter: function _converter() {
-	    var ccanvas = document.getElementById("canvas");
-	    var ctx = ccanvas.getContext("2d");
-	    ctx.canvas.width = 400;
-	    ctx.canvas.height = 200;
-
-	    ctx.arc(Math.random() * 200 + 100, 100, 50, 0, 2 * Math.PI);
-	    ctx.fillStyle = 'red';
-	    ctx.fill();
-	  },
-
-	  _pins: function _pins() {
-	    PDK.me('pins', { fields: Const.PIN_FIELDS }, function (s) {
-	      console.log(s);
-	    });
-	  },
-
 	  _logout: function _logout() {
-	    PDK.logout();
+	    PDK.logout(function () {
+	      this.setState({ boards: [], user: undefined });
+	    }.bind(this));
 	  },
 
 	  showBoards: function showBoards() {
@@ -25362,13 +25350,32 @@
 	      return this.state.boards.map(function (board) {
 	        return React.createElement(
 	          'li',
-	          { key: board.id, className: 'board-item' },
-	          board.name
+	          { key: board.id, className: 'board-item', onClick: function () {
+	              this._pin(board);
+	            }.bind(this) },
+	          React.createElement(
+	            'div',
+	            { className: 'board-name' },
+	            board.name
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'pin-it' },
+	            'Save'
+	          )
 	        );
-	      });
+	      }.bind(this));
 	    } else {
 	      return React.createElement('div', null);
 	    }
+	  },
+
+	  renderImage: function renderImage() {},
+
+	  setValue: function setValue(e) {
+	    var key = e.target.placeholder;
+	    var value = e.target.value;
+	    this.setState({ key: value });
 	  },
 
 	  render: function render() {
@@ -25382,7 +25389,17 @@
 	        React.createElement(
 	          'div',
 	          { className: 'content-left' },
-	          React.createElement('img', { id: 'image' })
+	          React.createElement(
+	            'div',
+	            { className: 'image-container' },
+	            React.createElement('img', { id: 'image' })
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'description-container' },
+	            React.createElement('input', { onChange: this.setValue, placeholder: 'description' }),
+	            React.createElement('input', { onChange: this.setValue, placeholder: 'link' })
+	          )
 	        ),
 	        React.createElement(
 	          'div',
@@ -25392,45 +25409,20 @@
 	            { className: 'board-list' },
 	            this.showBoards()
 	          )
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'button-container' },
+	        React.createElement(
+	          'div',
+	          { className: 'button login', onClick: this._login },
+	          'Log In'
 	        ),
 	        React.createElement(
 	          'div',
-	          { className: 'button-container' },
-	          React.createElement(
-	            'div',
-	            { className: 'button login', onClick: this._login },
-	            'Log In'
-	          ),
-	          React.createElement(
-	            'div',
-	            { className: 'button view', onClick: this._getSession },
-	            'Get Session'
-	          ),
-	          React.createElement(
-	            'div',
-	            { className: 'button view', onClick: this._pin },
-	            'Pin shark'
-	          ),
-	          React.createElement(
-	            'div',
-	            { className: 'button view', onClick: this._converter },
-	            'converter'
-	          ),
-	          React.createElement(
-	            'div',
-	            { className: 'button view', onClick: this._pins },
-	            'pins'
-	          ),
-	          React.createElement(
-	            'div',
-	            { className: 'button view', onClick: this._boards },
-	            'boards'
-	          ),
-	          React.createElement(
-	            'div',
-	            { className: 'button view', onClick: this._logout },
-	            'Logout'
-	          )
+	          { className: 'button view', onClick: this._logout },
+	          'Logout'
 	        )
 	      ),
 	      React.createElement('div', { className: 'background' })
